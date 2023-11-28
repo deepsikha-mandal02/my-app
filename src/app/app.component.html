@@ -1,0 +1,31 @@
+<div>
+  <h1>TODO List</h1>
+
+  <!-- Input field to add new tasks -->
+  <div>
+    <input type="text" [(ngModel)]="newTask" placeholder="New Task" />
+    <button (click)="addTask()">Add</button>
+  </div>
+
+  <h2>Active Tasks:</h2>
+  <ul>
+    <li *ngFor="let item of todoItems; let i = index">
+      <input type="checkbox" [(ngModel)]="item.completed" (ngModelChange)="updateCompletedItems()" /> {{ item.name }}
+      <button (click)="deleteTask(i)">Delete</button>
+      <ul *ngIf="item.completed">
+        <li *ngFor="let subtask of item.subtasks">{{ subtask }}</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Completed Tasks:</h2>
+  <ul>
+    <li *ngFor="let item of completedItems; let i = index">
+      {{ item.name }}
+      <button (click)="deleteCompletedTask(i)">Delete</button>
+      <ul>
+        <li *ngFor="let subtask of item.subtasks">{{ subtask }}</li>
+      </ul>
+    </li>
+  </ul>
+</div>
